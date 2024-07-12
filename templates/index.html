@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <h1 class="text-3xl font-bold mb-6">Book List</h1>
+    
+    <table class="min-w-full bg-white border border-gray-300">
+        <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">ID</th>
+                <th class="py-3 px-6 text-left">Title</th>
+                <th class="py-3 px-6 text-left">Author</th>
+                <th class="py-3 px-6 text-left">Photo</th>
+                <th class="py-3 px-6 text-left">Price</th>
+				<th class="py-3 px-6 text-left">Review</th>
+
+                <th class="py-3 px-6 text-left">CDate</th>
+                <th class="py-3 px-6 text-left">MDate</th>
+                <th class="py-3 px-6 text-left">Delete</th>
+                <th class="py-3 px-6 text-left">Update</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+            {% for b in books %}
+            <tr class="border-b border-gray-300 hover:bg-gray-100">
+                <td class="py-3 px-6 text-left">{{ b[0] }}</td>
+                <td class="py-3 px-6 text-left">{{ b[1] }}</td>
+                <td class="py-3 px-6 text-left">{{ b[2] }}</td>
+                <td class="py-3 px-6 text-left">
+                    <img src="{{ url_for('static', filename='/images/'+ b[3] )}}" class="w-24 h-24">
+                </td>
+                <td class="py-3 px-6 text-left">{{ b[4] }}</td>
+				<td class="py-3 px-6 text-left">{{ b[5] }}</td>
+
+
+                <td class="py-3 px-6 text-left">{{ b[6] }}</td>
+                <td class="py-3 px-6 text-left">{{ b[7] }}</td>
+                <td class="py-3 px-6 text-left">
+                    <a href="delete/{{ b[0] }}" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <a href="/upd/{{ b[0] }}" class="text-blue-500 hover:text-blue-700">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr class="my-6">
+
+    <h1 class="text-2xl font-bold mb-4">New Book</h1>
+
+    <form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700">Title</label>
+            <input type="text" name="title" id="title" placeholder="Title" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+        </div>
+        
+        <div class="mb-4">
+            <label for="author" class="block text-gray-700">Author</label>
+            <input type="text" name="author" id="author" placeholder="Author" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+        </div>
+        
+        <div class="mb-4">
+            <label for="photo" class="block text-gray-700">Photo</label>
+            <input type="file" name="photo" id="photo" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+        </div>
+        
+        <div class="mb-4">
+            <label for="price" class="block text-gray-700">Price</label>
+            <input type="text" name="price" id="price" placeholder="Price" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+        </div>
+        
+        <div class="mb-4">
+            <label for="review" class="block text-gray-700">Review</label>
+            <input type="text" name="review" id="review" placeholder="Review" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+        </div>
+        
+        <div class="flex items-center justify-between">
+            <input type="submit" value="Add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+        </div>
+    </form>
+
+	<div class="card-container">
+		<div class="row">
+
+
+		</div>
+	</div>
+
+</body>
+</html>
